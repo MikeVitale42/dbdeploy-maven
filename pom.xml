@@ -1,0 +1,94 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>dbdeploy-maven</artifactId>
+	<groupId>com.mikevitale</groupId>
+	<version>1.0-SNAPSHOT</version>
+	<name>DB Deploy Maven example</name>
+	<description>An example that shows how to use the DB Deploy Plugin in Maven using Postgres, that actually works.</description>
+
+	<properties>
+		<db.driver>org.postgresql.Driver</db.driver>
+		<db.url>jdbc:postgresql://localhost:5433/dbdeploy</db.url>
+		<db.user>mvitale</db.user>
+		<db.passwd></db.passwd>
+		<db.schema>dbdeploy</db.schema>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.1-901.jdbc4</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>sql-maven-plugin</artifactId>
+				<version>1.1</version>
+				<dependencies>
+					<dependency>
+						<groupId>postgresql</groupId>
+						<artifactId>postgresql</artifactId>
+						<version>9.1-901.jdbc4</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<driver>${db.driver}</driver>
+					<url>${db.url}</url>
+					<username>${db.user}</username>
+					<password>${db.passwd}</password>
+				</configuration>
+				<executions>
+					<execution>
+						<id>create-change-log</id>
+						<phase>process-test-sources</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<srcFiles>
+								<srcFile>${basedir}/db/scripts/createSchemaVersionTable.sql</srcFile>
+							</srcFiles>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.dbdeploy</groupId>
+				<artifactId>maven-dbdeploy-plugin</artifactId>
+				<version>3.0M3</version>
+
+				<configuration>
+					<scriptdirectory>db/scripts</scriptdirectory>
+					<driver>${db.driver}</driver>
+					<url>${db.url}</url>
+					<userid>${db.user}</userid>
+					<password>${db.passwd}</password>
+					<dbms>${db.schema}</dbms>
+					<delimiter>;</delimiter>
+					<delimiterType>row</delimiterType>
+					<outputfile>apply.sql</outputfile>
+					<undoOutputfile>undo.sql</undoOutputfile>
+				</configuration>
+
+				<dependencies>
+					<dependency>
+						<groupId>postgresql</groupId>
+						<artifactId>postgresql</artifactId>
+						<version>9.1-901.jdbc4</version>
+					</dependency>
+					<dependency>
+						<groupId>com.dbdeploy</groupId>
+						<artifactId>dbdeploy-core</artifactId>
+						<version>3.0M3</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+</project>
