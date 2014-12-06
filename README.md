@@ -11,10 +11,10 @@ Code Example
 Assumptions/Pre-requisites
 --------------------------
 
-# You have a Postgres database running on locahost port 5433.
-# Your username is mvitale.
-# You're able to connect to your Postgres database without a password.
-# The schema that you're trying to use DB Deploy on is named `dbdeploy`.
+1. You have a Postgres database running on locahost port 5433.
+2. Your username is mvitale.
+3. You're able to connect to your Postgres database without a password.
+4. The schema that you're trying to use DB Deploy on is named `dbdeploy`.
 
 Note
 ----
@@ -25,10 +25,10 @@ Motivation
 ==========
 
 For a couple years now, I've been toying around with trying to get DB Deploy working in some of my projects.  One thing
-or another has always stopped me.  The fact that [DB Deploy] hasn't been developed in quite a very long time doesn't
+or another has always stopped me.  The fact that [DB Deploy](http://www.dbdeploy.com/) hasn't been developed in quite a very long time doesn't
 help.
 
-I typically use [Postgres] as my database, and DB Deploy had no out-of-the-box way to create a `changelog` table...But
+I typically use [Postgres](http://www.postgresql.org/) as my database, and DB Deploy had no out-of-the-box way to create a `changelog` table...But
 that was hardly a blocker, because that's easy enough to do.
 
 Right now, I have a client where I'm coaching the starting dev team on a Greenfield project.  I was not going to be
@@ -37,7 +37,7 @@ implementation.
 
 The Maven support in DB Deploy's latest version leaves quite a few things to be desired.  For one, it will never even
 create the changelog table if it doesn't exist out of the box.  That's a pretty significant oversight.  However,
-[Shivprasad Bade] has a wonderful [blog post] from 2010 that covers how to do it quite well...But the blog doesn't
+[Shivprasad Bade](http://byteco.de/about/) has a wonderful [blog post](http://byteco.de/2010/01/31/maven-dbdeploy-hsqldb-without-ant/) from 2010 that covers how to do it quite well...But the blog doesn't
 provide any kind of full solution.
 
 Let me be clear, this is really Shivprasad's work.  I'm just providing a working example, because I haven't yet
@@ -51,7 +51,7 @@ Installation
 Contributors
 ============
 
-[Shivprasad Bade]
+Shivprasad Bade
 Mike Vitale mike@mavelo.us
 
 License
@@ -73,7 +73,3 @@ License
   0. You just DO WHAT THE FUCK YOU WANT TO.
 ```
 
-[DB Deploy] http://www.dbdeploy.com/
-[Postgres] http://www.postgresql.org/
-[Shivprasad Bade] http://byteco.de/about/
-[blog post] http://byteco.de/2010/01/31/maven-dbdeploy-hsqldb-without-ant/
