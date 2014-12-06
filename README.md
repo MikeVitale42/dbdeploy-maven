@@ -51,8 +51,8 @@ Installation
 Contributors
 ============
 
-Shivprasad Bade
-Mike Vitale mike@mavelo.us
+* Shivprasad Bade
+* Mike Vitale mike@mavelo.us
 
 License
 =======
